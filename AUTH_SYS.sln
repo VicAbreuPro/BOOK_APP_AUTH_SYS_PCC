@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{46F56855-B137-4ED9-9DEB-48D96928E6F6}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Users", "Users\Users.csproj", "{B72F4C4B-D83F-4064-852F-3A43902DDB1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailService", "EmailService\EmailService.csproj", "{6A98D895-3EA6-4FB5-BE73-8E940BC270E5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B72F4C4B-D83F-4064-852F-3A43902DDB1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B72F4C4B-D83F-4064-852F-3A43902DDB1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B72F4C4B-D83F-4064-852F-3A43902DDB1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B72F4C4B-D83F-4064-852F-3A43902DDB1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A98D895-3EA6-4FB5-BE73-8E940BC270E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A98D895-3EA6-4FB5-BE73-8E940BC270E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A98D895-3EA6-4FB5-BE73-8E940BC270E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A98D895-3EA6-4FB5-BE73-8E940BC270E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {883DFE98-E58C-45F3-8572-C6DA375A1D13}
+	EndGlobalSection
+EndGlobal

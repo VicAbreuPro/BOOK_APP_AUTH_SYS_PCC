@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  user_ms:
+    build:
+        context: ./Users
+        dockerfile: Dockerfile
+    ports:
+        - "8082:80"
+    depends_on:
+        - arq_db
+  email_ms:
+    build:
+        context: ./EmailService
+        dockerfile: Dockerfile
+    ports:
+        - "8083:80"
+
+  arq_db:
+    image: mcr.microsoft.com/mssql/server:latest
+    environment:
+      SA_PASSWORD: "adminDev123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql_volume:/var/opt/mssql # Mount volume for SQL Server data persistence
+
+volumes:
+  sql_volume:
