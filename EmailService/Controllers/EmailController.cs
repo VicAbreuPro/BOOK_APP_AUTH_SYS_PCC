@@ -25,7 +25,7 @@ namespace EmailService.Controllers
                 return BadRequest(ModelState);
             }
 
-            var apiKey = "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";
+            var apiKey = "";
 
             var client = new SendGridClient(apiKey);
 
