@@ -1,0 +1,222 @@
+{
+	"info": {
+		"_postman_id": "ed989794-e7d5-4af5-be3d-e75b3a822bae",
+		"name": "ARQ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "19253570",
+		"_collection_link": "https://web.postman.co/workspace/ambigest-project-Workspace~a427443d-8893-4419-808c-b04ff2754504/collection/19253570-ed989794-e7d5-4af5-be3d-e75b3a822bae?source=collection_link"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Update Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJzdHJpbmciLCJleHAiOjE3MDI4NTg1MzF9.o0Sfbv0rGYkbu7r3tqy2Aqg7SK3zh_VMARYpBmTNU3g8U9FAkkomqSqVBc4U0uoHqmQ0OqGG0KvZxgBB3UYqWg"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"oldPassword\": \"test2\",\r\n  \"newPassword\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8082/user/ChangePassword"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"test2\",\r\n  \"email\": \"victor.abreu09@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8082/user/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"test2\",\r\n  \"password\": \"test2\",\r\n  \"email\": \"victor.abreu09@gmail.com\",\r\n  \"fullName\": \"test2\",\r\n  \"country\": \"test2\",\r\n  \"role\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8082/user/register"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "Create Book",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsImV4cCI6MTcwMjg2MDkwMX0.FjgEzYMD17b1p08m3M3J7tsADhqMtYYvHpyoDdy87dXC9g7GXIoKB7fS_vT0O4IRelGIkmkRmBLnGMFN9Hs1zg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Book2\",\r\n  \"year\": 2022,\r\n  \"authorId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/book/addBook"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsImV4cCI6MTcwMjg2MDkwMX0.FjgEzYMD17b1p08m3M3J7tsADhqMtYYvHpyoDdy87dXC9g7GXIoKB7fS_vT0O4IRelGIkmkRmBLnGMFN9Hs1zg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/allBooks"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Author",
+			"item": [
+				{
+					"name": "Create Author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsImV4cCI6MTcwMjg2MDkwMX0.FjgEzYMD17b1p08m3M3J7tsADhqMtYYvHpyoDdy87dXC9g7GXIoKB7fS_vT0O4IRelGIkmkRmBLnGMFN9Hs1zg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Author1\",\r\n  \"birthDate\": \"2023-12-17\",\r\n  \"biography\": \"string\",\r\n  \"country\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/Author/addAuthor"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Authors",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsImV4cCI6MTcwMjg2MDkwMX0.FjgEzYMD17b1p08m3M3J7tsADhqMtYYvHpyoDdy87dXC9g7GXIoKB7fS_vT0O4IRelGIkmkRmBLnGMFN9Hs1zg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/Author/allAuthors"
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsImV4cCI6MTcwMjg2MDkwMX0.FjgEzYMD17b1p08m3M3J7tsADhqMtYYvHpyoDdy87dXC9g7GXIoKB7fS_vT0O4IRelGIkmkRmBLnGMFN9Hs1zg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/Author/author/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsImV4cCI6MTcwMjg2MDkwMX0.FjgEzYMD17b1p08m3M3J7tsADhqMtYYvHpyoDdy87dXC9g7GXIoKB7fS_vT0O4IRelGIkmkRmBLnGMFN9Hs1zg"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"authorId\": 1,\r\n  \"name\": \"UpdatedAuthor\",\r\n  \"birthDate\": \"2023-12-17\",\r\n  \"biography\": \"UpdatedAuthor\",\r\n  \"country\": \"UpdatedAuthor\",\r\n  \"isActive\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/Author/updateAuthor"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Author",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJhZG1pbiIsImV4cCI6MTcwMjg2MDkwMX0.FjgEzYMD17b1p08m3M3J7tsADhqMtYYvHpyoDdy87dXC9g7GXIoKB7fS_vT0O4IRelGIkmkRmBLnGMFN9Hs1zg"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/Author/remove/2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Shelf",
+			"item": []
+		}
+	]
+}
