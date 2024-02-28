@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-ms
+  template:
+    metadata:
+      labels:
+        app: user-ms
+    spec:
+      containers:
+      - name: user-ms
+        image: your-registry/users:latest #alterar
+        ports:
+        - containerPort: 80
