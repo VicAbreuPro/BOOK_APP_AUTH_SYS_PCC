@@ -16,18 +16,23 @@ namespace Users.Controllers
     {
         private readonly UserRepository _userRepository;
         private readonly OtpUserRepository _otpRepository;
-        private readonly IConfiguration _configuration;
+        private readonly string? emailServiceUrl;
+        private readonly string? otpKey;
+        private readonly string? token;
         private HttpClient _httpClient;
 
-        public UserController(UserRepository userRepository, OtpUserRepository otpRepository, IConfiguration configuration)
+        public UserController(UserRepository userRepository, OtpUserRepository otpRepository)
         {
             _userRepository = userRepository;
-            _configuration = configuration;
             _otpRepository = otpRepository;
+
+            emailServiceUrl = Environment.GetEnvironmentVariable("EMAIL_URL");
+            otpKey = Environment.GetEnvironmentVariable("TOTP_Key");
+            token = Environment.GetEnvironmentVariable("Token");
 
             _httpClient = new()
             {
-                BaseAddress = new Uri("http://host.docker.internal:8083/Email/")
+                BaseAddress = new Uri(emailServiceUrl ?? "")
             };
         }
 
@@ -120,11 +125,6 @@ namespace Users.Controllers
                 {
                     TimeSpan dif = currentTime - attempt.CreatedAt;
 
-                    Console.WriteLine("Attempt time: " + attempt.CreatedAt.ToString());
-                    Console.WriteLine("Current time: " + currentTime.ToString());
-                    Console.WriteLine("Dif: " + dif.ToString());
-
-
                     if(dif.TotalMinutes <= 5)
                     {
                         return BadRequest("To Many attempts, try again later!");
@@ -161,7 +161,7 @@ namespace Users.Controllers
             }
 
             var user = _userRepository.GetUserByEmail(loginRequest.Email);
-            var token = "";
+            var userToken = "";
 
             if(user != null)
             {
@@ -174,9 +174,9 @@ namespace Users.Controllers
                 {
                     TokenService tokenconfig;
 
-                    tokenconfig = new TokenService(_configuration);
+                    tokenconfig = new TokenService(token);
 
-                    token = tokenconfig.GenerateToken(user);
+                    userToken = tokenconfig.GenerateToken(user);
 
                     removeAttempts = _userRepository.RemoveAllLoginAttempts(loginRequest.Email);
                 }
@@ -191,7 +191,7 @@ namespace Users.Controllers
                 return BadRequest("Invalid Credentials");
             }
 
-            return Ok(token);
+            return Ok(userToken);
         }
 
         [HttpPut("ChangePassword")]
@@ -206,16 +206,16 @@ namespace Users.Controllers
 
             try
             {
-                var token = "";
+                var userToken = "";
                 var resultMessage = "Password Changed Succesfully";
 
                 TokenService ts;
 
-                ts = new TokenService(_configuration);
+                ts = new TokenService(token);
 
                 if (HttpContext.Request.Headers.TryGetValue("Authorization", out var authHeader))
                 {
-                    token = authHeader.ToString().Replace("Bearer ", "");
+                    userToken = authHeader.ToString().Replace("Bearer ", "");
                 }
 
                 if (!HttpContext.Request.Headers.TryGetValue("Authorization", out var authHeaderAux))
@@ -224,7 +224,7 @@ namespace Users.Controllers
                 }
 
                 // Get userId from token
-                int userId = ts.GetUserIdFromJwtToken(token);
+                int userId = ts.GetUserIdFromJwtToken(userToken);
 
                 var user = _userRepository.GetUserById(userId);
 
@@ -291,12 +291,12 @@ namespace Users.Controllers
                 return BadRequest(ModelState);
             }
 
-            string? secretKey   = _configuration.GetSection("AppSettings:TOTP_Key").Value;
+            string? secretKey   = otpKey;
 
             DateTime currentTime = DateTime.UtcNow;
 
-            // Create a TOTP generator with a 30-second time step and a 6-digit code length
-            var totp = new Totp(Base32Encoding.ToBytes(secretKey), step: 520);
+            // Create a TOTP generator with a 3 minutes time step and a 6-digit code length
+            var totp = new Totp(Base32Encoding.ToBytes(secretKey), step: 180);
 
             // Calculate the TOTP code for the current time
             string otp = totp.ComputeTotp(currentTime);
@@ -350,9 +350,9 @@ namespace Users.Controllers
                 return BadRequest("Password too short");
             }
 
-            string? secretKey = _configuration.GetSection("AppSettings:TOTP_Key").Value;
+            string? secretKey = otpKey;
 
-            var totp = new Totp(Base32Encoding.ToBytes(secretKey), step: 520);
+            var totp = new Totp(Base32Encoding.ToBytes(secretKey), step: 180);
 
             bool result = totp.VerifyTotp(totpReceived, out _, window: null);
 

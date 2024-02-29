@@ -9,11 +9,15 @@ namespace EmailService.Controllers
     [ApiController]
     public class EmailController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
+        private readonly string? sendGridKey;
+        private readonly string? senderEmail;
+        private readonly string? senderName;
 
-        public EmailController(IConfiguration configuration)
+        public EmailController()
         {
-            _configuration = configuration;
+            sendGridKey = Environment.GetEnvironmentVariable("SendGridKey");
+            senderEmail = Environment.GetEnvironmentVariable("Sender");
+            senderName = Environment.GetEnvironmentVariable("SenderName");
         }
 
         [Route("send")]
@@ -25,11 +29,14 @@ namespace EmailService.Controllers
                 return BadRequest(ModelState);
             }
 
-            var apiKey = _configuration.GetSection("AppSettings:Key").Value;
+            if(sendGridKey == null || sendGridKey == string.Empty || senderEmail == null || senderEmail == string.Empty || senderName == null || senderName == string.Empty)
+            {
+                return StatusCode(503);
+            }
 
-            var client = new SendGridClient(apiKey);
+            var client = new SendGridClient(sendGridKey);
 
-            var from = new EmailAddress("a18841@alunos.ipca.pt", "BookApps APP");
+            var from = new EmailAddress(senderEmail, senderName);
             var to = new EmailAddress(mail.To, "User");
 
             var subject = mail.Subject;
