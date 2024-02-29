@@ -8,11 +8,11 @@ namespace Users.Services
 {
     public class TokenService
     {
-        private readonly IConfiguration _configuration;
+        private readonly string keyToken;
 
-        public TokenService(IConfiguration configuration)
+        public TokenService(string? keyConfig)
         {
-            _configuration = configuration;
+            keyToken = keyConfig ?? "commonAuth";
         }
 
         public string GenerateToken(User user)
@@ -24,7 +24,7 @@ namespace Users.Services
             };
 
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
-                _configuration.GetSection("AppSettings:Token").Value ?? "commonAuth" ));
+                keyToken));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
@@ -41,7 +41,7 @@ namespace Users.Services
         public int GetUserIdFromJwtToken(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_configuration["AppSettings:Token"] ?? "commonAuth" );
+            var key = Encoding.ASCII.GetBytes(keyToken);
 
             try
             {
