@@ -28,7 +28,7 @@ services:
   arq_db:
     image: mcr.microsoft.com/mssql/server:latest
     environment:
-      SA_PASSWORD: "adminDev123"
+      SA_PASSWORD: ""
       ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
